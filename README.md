@@ -96,3 +96,29 @@ And in the log you can see the difference between the two serializations:
 [2023-06-22T07:14:56.191Z] Executing 'Functions.First' (Reason='(null)', Id=eab1f5b5-5aba-4223-94bc-d380816bc0ee)
 [2023-06-22T07:14:56.251Z] Executed 'Functions.First' (Succeeded, Id=eab1f5b5-5aba-4223-94bc-d380816bc0ee, Duration=59ms)
 ```
+
+## Other workarounds
+
+You can enforce the converter generally for all functions by adding the following to your `Startup.cs`:
+
+```csharp
+.ConfigureServices((hostBuilderContext,services) =>
+{
+    services.Configure<JsonSerializerOptions>(options =>
+    {
+        options.Converters.Add(new DecimalFormatConverter());
+    });
+})
+```
+
+Or you can also format all the numbers as strings:
+
+```csharp
+.ConfigureServices((hostBuilderContext,services) =>
+{
+    services.Configure<JsonSerializerOptions>(options =>
+    {
+        options.NumberHandling= JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString;
+    });
+})
+```
