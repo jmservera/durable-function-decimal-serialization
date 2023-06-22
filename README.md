@@ -99,7 +99,7 @@ And in the log you can see the difference between the two serializations:
 
 ## Other workarounds
 
-You can enforce the converter generally for all functions by adding the following to your `Startup.cs`:
+You can enforce the converter generally for all functions by adding the following to your `Program.cs` after the `ConfigureFunctionsWorkerDefaults` call:
 
 ```csharp
 .ConfigureServices((hostBuilderContext,services) =>
