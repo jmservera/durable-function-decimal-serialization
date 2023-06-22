@@ -9,7 +9,6 @@ You can find a small class with two decimals, one with the converter and another
 public class MyData{
     [JsonConverter(typeof(DecimalFormatConverter))]
     public Decimal MyNumber {get;set;}
-
     public Decimal MyNumber2 {get;set;}
     public string? Name {get;set;}
 }
@@ -38,8 +37,7 @@ Then in the function I send and receive the data between the two durable functio
 
 ```csharp
 [Function(nameof(First))]
-public static async Task<List<string>> RunOrchestrator(
-    [OrchestrationTrigger] TaskOrchestrationContext context)
+public static async Task<List<string>> RunOrchestrator([OrchestrationTrigger] TaskOrchestrationContext context)
 {
     ILogger logger = context.CreateReplaySafeLogger(nameof(First));
     logger.LogInformation("Saying hello.");
